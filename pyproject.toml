@@ -1,0 +1,79 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ships-log"
+dynamic = ["version"]
+description = "Django API and UI for keeping ship's data (inventory, maintenence log, etc.)."
+readme = "README.md"
+requires-python = ">=3.12.2"
+license = "GPL-3.0"
+keywords = []
+authors = [
+  { name = "Matt", email = "mweber42@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/unknown/ships-log#readme"
+Issues = "https://github.com/unknown/ships-log/issues"
+Source = "https://github.com/unknown/ships-log"
+
+[tool.hatch.version]
+path = "ships_log/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "coverage[toml]>=6.5",
+  "pytest",
+]
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
+]
+cov = [
+  "test-cov",
+  "cov-report",
+]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.12"]
+
+[tool.hatch.envs.types]
+dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/ships_log tests}"
+
+[tool.coverage.run]
+source_pkgs = ["ships_log", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/ships_log/__about__.py",
+]
+
+[tool.coverage.paths]
+ships_log = ["src/ships_log", "*/ships-log/src/ships_log"]
+tests = ["tests", "*/ships-log/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.hatch.build.targets.wheel]
+      packages = ["/ships_log"]
