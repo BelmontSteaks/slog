@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ships-log"
+name = "slog"
 dynamic = ["version"]
-description = "Django API and UI for keeping ship's data (inventory, maintenence log, etc.)."
+description = "Django-Ninja API and UI for keeping ship's data (inventory, maintenence log, etc.)."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "GPL-3.0"
@@ -28,16 +28,17 @@ Issues = "https://github.com/unknown/ships-log/issues"
 Source = "https://github.com/unknown/ships-log"
 
 [tool.hatch.version]
-path = "ships_log/__about__.py"
+path = "slog/__about__.py"
 
 [tool.hatch.envs.default]
 dependencies = [
   "coverage[toml]>=6.5",
   "pytest",
   "django-ninja>=1.1.0",
+  "gunicorn>=21.0.1",
 ]
 [tool.hatch.envs.default.scripts]
-runserver = "python3 ships_log/manage.py runserver 0.0.0.0:8000"
+runserver = "cd slog && gunicorn --bind 0.0.0.0:8000 slog.wsgi"
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = [
@@ -64,11 +65,11 @@ source_pkgs = ["ships_log", "tests"]
 branch = true
 parallel = true
 omit = [
-  "src/ships_log/__about__.py",
+  "slog/__about__.py",
 ]
 
 [tool.coverage.paths]
-ships_log = ["src/ships_log", "*/ships-log/src/ships_log"]
+slog = ["slog", "*/slog/apps"]
 tests = ["tests", "*/ships-log/tests"]
 
 [tool.coverage.report]
@@ -79,4 +80,4 @@ exclude_lines = [
 ]
 
 [tool.hatch.build.targets.wheel]
-      packages = ["/ships_log"]
+      packages = ["/slog"]
