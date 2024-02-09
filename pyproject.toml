@@ -7,7 +7,7 @@ name = "ships-log"
 dynamic = ["version"]
 description = "Django API and UI for keeping ship's data (inventory, maintenence log, etc.)."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 license = "GPL-3.0"
 keywords = []
 authors = [
