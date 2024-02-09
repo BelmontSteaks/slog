@@ -16,7 +16,6 @@ RUN python -m pip install hatch
 # Install Python app
 COPY --link pyproject.toml README.md /app/
 COPY --link ships_log /app/ships_log
-COPY --link apidemo /app/apidemo
 WORKDIR /app
 
 # Install Hatch environment
