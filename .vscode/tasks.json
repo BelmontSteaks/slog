@@ -1,0 +1,21 @@
+{
+    "tasks": [
+      {
+        "type": "docker-run",
+        "label": "docker-run: debug",
+        "dependsOn": ["docker-build"],
+        "python": {
+            "args": [
+                "run", "dev:runserver"
+            ],
+            "module": "hatch",
+        }
+      },
+      {
+        "label": "killdebugger",
+        "type": "shell",
+        "command": "lsof -t -i tcp:5678 -i tcp:8000 | xargs kill -9"
+      }
+    ]
+}
+  

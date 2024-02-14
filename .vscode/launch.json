@@ -1,0 +1,53 @@
+{
+    "configurations": [
+        {
+            "name": "Docker Attach",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+                "host": "127.0.0.1",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "/app"
+                }
+            ],
+            "django": true,
+            "postDebugTask": "killdebugger",
+        },
+        {
+            "name": "Local Attach",
+            "type": "debugpy",
+            "request": "attach",
+            "connect": {
+                "host": "127.0.0.1",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "${workspaceFolder}",
+                }
+            ],
+            "django": true,
+            "postDebugTask": "killdebugger",
+        },
+        {
+            "name": "TestLocal Attach",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pip",
+            "args": ["run", "dev:runserver"],
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "${workspaceFolder}",
+                }
+            ],
+            "django": true,
+            "postDebugTask": "killdebugger",
+        },
+    ]
+}
