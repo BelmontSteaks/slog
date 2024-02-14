@@ -50,6 +50,17 @@ cov = [
   "cov-report",
 ]
 
+[tool.hatch.envs.dev]
+template = "default"
+dependencies = [
+  "django-ninja>=1.1.0",
+  "gunicorn",
+  "debugpy"
+]
+
+[tool.hatch.envs.dev.scripts]
+runserver = "cd slog && python -m debugpy --wait-for-client --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000"
+
 [[tool.hatch.envs.all.matrix]]
 python = ["3.11"]
 

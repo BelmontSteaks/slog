@@ -27,4 +27,4 @@ RUN hatch env prune
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
 
-CMD ["hatch", "run", "runserver"]
+CMD ["hatch", "run", "dev:runserver"]
