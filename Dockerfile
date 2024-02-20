@@ -18,7 +18,7 @@ RUN python -m pip install hatch
 # Install Python app
 COPY pyproject.toml README.md /app/
 COPY slog /app/slog
-COPY hatch_run.sh /app/slog/
+COPY entrypoint.sh /app/slog/
 WORKDIR /app/slog
 
 
@@ -31,4 +31,4 @@ RUN hatch env prune
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
 
-ENTRYPOINT ["./hatch_run.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
