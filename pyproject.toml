@@ -38,7 +38,7 @@ dependencies = [
   "gunicorn>=21.0.1",
 ]
 [tool.hatch.envs.default.scripts]
-runserver = "cd slog && gunicorn --bind 0.0.0.0:8000 slog.wsgi"
+runserver = "cd slog && gunicorn --bind 0.0.0.0:8080 slog.wsgi"
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = [
