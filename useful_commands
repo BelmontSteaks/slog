@@ -1,0 +1,14 @@
+# Configure Docker to use your Artifact Registry credentials when interacting with Artifact Registry. (You are only required to do this once.)
+gcloud auth configure-docker us-central1-docker.pkg.dev
+
+# Build in aftifact registry
+gcloud builds submit --region=us-central1 --config cloudbuild.yaml
+
+# Run image locally
+docker run us-central1-docker.pkg.dev/slogrr/cloud-run-source-deploy/slogrr:latest
+
+# Pull latest and deploy locally
+docker pull us-central1-docker.pkg.dev/slogrr/cloud-run-source-deploy/slogrr:latest && docker run us-central1-docker.pkg.dev/slogrr/cloud-run-source-deploy/slogrr:latest
+
+# Deploy to Cloud Run
+gcloud run deploy slogrr --image us-central1-docker.pkg.dev/slogrr/cloud-run-source-deploy/slogrr:latest
