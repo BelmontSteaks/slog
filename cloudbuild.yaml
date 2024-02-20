@@ -1,0 +1,10 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/slogrr:latest', '--build-arg=MYENV=$_MYENV', '.']
+  # script: |
+  #   docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/slogrr:latest --build-arg=MYENV=$_MYENV .
+  automapSubstitutions: true
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/slogrr:latest'
+substitutions:
+  _MYENV: dev
